@@ -1,12 +1,12 @@
-import React from 'react'
-import { Container, Logo, LogoutBtn } from "../index"
-import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-function Header() {
-  const authStatus = useSelector((state) => state.auth.status)
-  // const authStatus = true
-  const navigate = useNavigate()
+import React from 'react';
+import { Container, Logo, LogoutBtn } from "../index";
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
+function Header() {
+  const authStatus = useSelector((state) => state.auth.status);
+  const location = useLocation();
+  
   const navItems = [
     {
       name: 'Home',
@@ -33,27 +33,28 @@ function Header() {
       slug: "/add-post",
       active: authStatus,
     },
-  ]
+  ].filter(item => item.active);
+
   return (
-    <header className='py-3 shadow bg-gray-500'>
+    <header className='w-full py-3 shadow-lg bg-gray-50 border-b-[#5289DC] border-b border-solid'>
       <Container>
-        <nav className='flex'>
+        <nav className='w-full flex justify-between'>
           <div className='mr-4'>
             <Link to='/'>
-              <Logo width = '70px'/>
+              <Logo/>
             </Link>
           </div>
-          <ul className='flex ml-auto'>
+          <ul className='flex'>
             {
-              navItems.map((item)=>(
-                item.active?(
-                  <li key={item.name}>
-                    <button
-                      onClick={()=>navigate(item.slug)}
-                      className='inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
-                    >{item.name}</button>
-                  </li>
-                ):null
+              navItems.map((item) => (
+                <li key={item.name} className='mx-2'>
+                  <Link
+                    to={item.slug}
+                    className={`font-semibold inline-block px-2 py-2 duration-200 ${location.pathname === item.slug ? 'text-blue-400 underline' : 'text-gray-600 hover:text-blue-400'}`}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
               ))
             }
             {authStatus && (
@@ -62,12 +63,10 @@ function Header() {
               </li>
             )}
           </ul>
-
-
         </nav>
       </Container>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
