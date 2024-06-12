@@ -34,22 +34,13 @@ function Signup() {
                     </span>
                 </div>
                 <h2 className='text-center text-2xl font-bold leading-tight'> Sign up to create your account</h2>
-                <p className='mt-2 text-center text-base text-black/60'>
-                    Already have an account?&nbsp;
-                    <Link
-                        to={"/login"}
-                        className='font-medium text-primary transition-all duration-200 hover:underline'
-                    >
-                        Sign In
-                    </Link>
-                </p>
                 {error && <p className='text-red-600 mt-8 text-center'>{error}</p>}
 
-                <form onSubmit={handleSubmit(create)}>
-                    <div className='space-y-5'>
+                <form onSubmit={handleSubmit(create) } className='mt-8'>
+                    <div className='space-y-5 flex flex-col items-start'>
 
                         <Input
-                            label="Full Name"
+                            // label="Full Name"
                             placeholder="Enter your full name"
                             {...register("name", {
                                 required: true,
@@ -57,7 +48,7 @@ function Signup() {
                         />
 
                         <Input
-                            label="Email: "
+                            // label="Email: "
                             placeholder="Enter your Email"
                             type="email"
                             {...register("email", {
@@ -69,17 +60,26 @@ function Signup() {
                         />
 
                         <Input
-                            label="Password:"
+                            // label="Password:"
                             type="password"
                             placeholder="Enter your password"
                             {...register("password", {
                                 required: true,
                                 
-                            })}
+                                })}
 
                         />
+                                <p className='mt-2 text-center text-base text-black/60'>
+                                    Already have an account?&nbsp;
+                                    <Link
+                                        to={"/login"}
+                                        className='font-medium text-primary transition-all duration-200 hover:underline'
+                                    >
+                                        Sign In
+                                    </Link>
+                                </p>
 
-                        <Button type="submit" className="w-full">Create account</Button>
+                        <Button type="submit" className="w-full text-xl font-medium">Create account</Button>
 
                     </div>
                 </form>

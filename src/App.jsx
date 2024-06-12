@@ -25,14 +25,21 @@ function App() {
   }, [])
 
   return !loading?(
-    <div className='w-full flex flex-wrap bg-white'>
-      <div className='w-full block'>
-        <Header/>
-        <main>
-          <Outlet/>
-        </main>
-        <Footer/>
-      </div>
+    // <div className='w-full flex flex-wrap bg-white'>
+    //   <div className='w-full block'>
+    //     <Header/>
+    //     <main>
+    //       <Outlet/>
+    //     </main>
+    //     <Footer/>
+    //   </div>
+    // </div>
+    <div className="flex flex-col min-h-screen bg-white ">
+      <Header />
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   ): null
 }
